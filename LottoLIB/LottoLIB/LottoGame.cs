@@ -1,6 +1,4 @@
-﻿using LottoLIB;
-
-namespace LottoLIB
+﻿namespace LottoLIB
 {
     public class LottoGame
     {
@@ -9,13 +7,14 @@ namespace LottoLIB
         private readonly List<int> remainingNumbers = new();
         private readonly Random randomGenerator = new();
         public int LastDrawnNumber { get; private set; }
+        public bool IsGameOver { get; private set; }
 
         public Player CurrentPlayer => Players[currentPlayerIndex];
         public int RemainingCount => remainingNumbers.Count;
 
         public event Action<int>? NumberDrawn;
         public event Action<Player>? TurnChanged;
-        public event Action<Player>? PlayerWon;
+        public event Action<List<Player>>? PlayerWon;
 
         public LottoGame(IEnumerable<string> playerNames)
         {
@@ -27,7 +26,8 @@ namespace LottoLIB
 
         public void DrawNext()
         {
-            if (remainingNumbers.Count == 0) return;
+            if (IsGameOver || remainingNumbers.Count == 0) return;
+
             int index = randomGenerator.Next(remainingNumbers.Count);
             LastDrawnNumber = remainingNumbers[index];
             remainingNumbers.RemoveAt(index);
@@ -35,13 +35,18 @@ namespace LottoLIB
             foreach (var player in Players) player.MarkNumber(LastDrawnNumber);
             NumberDrawn?.Invoke(LastDrawnNumber);
 
-            foreach (var player in Players)
-                if (!player.HasWon && player.CheckWin()) PlayerWon?.Invoke(player);
+            var currentWinners = Players.Where(p => !p.HasWon && p.CheckWin()).ToList();
+
+            if (currentWinners.Count > 0)
+            {
+                IsGameOver = true;
+                PlayerWon?.Invoke(currentWinners);
+            }
         }
 
         public void NextTurn()
         {
-            if (Players.Count <= 1) return;
+            if (IsGameOver || Players.Count <= 1) return;
             currentPlayerIndex = (currentPlayerIndex + 1) % Players.Count;
             TurnChanged?.Invoke(CurrentPlayer);
         }
@@ -52,6 +57,7 @@ namespace LottoLIB
             remainingNumbers.AddRange(Enumerable.Range(1, 90));
             LastDrawnNumber = 0;
             currentPlayerIndex = 0;
+            IsGameOver = false;
             foreach (var player in Players) player.Reset();
             TurnChanged?.Invoke(CurrentPlayer);
         }

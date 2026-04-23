@@ -123,15 +123,26 @@ namespace LottoFORM
             this.Invoke(new Action(() => UpdateTurnDisplay()));
         }
 
-        private void OnPlayerWon(Player player)
+        private void OnPlayerWon(List<Player> winners)
         {
             this.Invoke(new Action(() =>
             {
                 btnDraw.Enabled = false;
                 btnNext.Enabled = false;
-                lblStatus.Text = $"🏆 {player.Name} ВЫИГРАЛ!";
+
+                string winnerNames = string.Join(" и ", winners.Select(w => w.Name));
+                bool isTie = winners.Count > 1;
+
+                lblStatus.Text = isTie
+                    ? $"🏆 Ничья! {winnerNames} выиграли!"
+                    : $"🏆 {winners[0].Name} ВЫИГРАЛ!";
                 lblStatus.ForeColor = success;
-                MessageBox.Show($"Поздравляем! {player.Name} полностью закрыл карточку!", "Победа", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                string message = isTie
+                    ? $"Поздравляем! {winnerNames} одновременно закрыли карточки на числе {game.LastDrawnNumber}."
+                    : $"Поздравляем! {winners[0].Name} полностью закрыл карточку!";
+
+                MessageBox.Show(message, isTie ? "Ничья!" : "Победа!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }));
         }
     }
