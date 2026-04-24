@@ -119,11 +119,11 @@
 | **Проверка победы** | Выполняется после каждого вытягивания; при совпадении — фиксация результата |
 
 👨‍💻 Технологии
--Язык: C# 12
--UI: Windows Forms (Designer + code-behind)
--Тестирование: MSTest (.NET Testing Platform)
--Архитектура: Многоуровневая
--LottoLIB — ядро игры (модели, логика, события)
--LottoFORM — презентационный слой (формы, отрисовка, ввод)
--LottoTests — модульные тесты
--Оптимизация: Двойная буферизация (DoubleBuffered, SetStyle), Environment.Exit(0) для мгновенного завершения
+- Язык: C# 12
+- UI: Windows Forms (Designer + code-behind)
+- Тестирование: MSTest (.NET Testing Platform)
+- Архитектура: Многоуровневая
+- LottoLIB — ядро игры (модели, логика, события)
+- LottoFORM — презентационный слой (формы, отрисовка, ввод)
+- LottoTests — модульные тесты
+- Оптимизация: Двойная буферизация (DoubleBuffered, SetStyle), Environment.Exit(0) для мгновенного завершения
