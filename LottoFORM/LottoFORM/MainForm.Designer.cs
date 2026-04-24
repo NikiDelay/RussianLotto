@@ -37,41 +37,41 @@
             pnlHeader.Margin = new Padding(3, 4, 3, 4);
             pnlHeader.Name = "pnlHeader";
             pnlHeader.Padding = new Padding(11, 13, 11, 13);
-            pnlHeader.Size = new Size(1284, 80);
+            pnlHeader.Size = new Size(1284, 82);
             pnlHeader.TabIndex = 0;
             // 
             // lblTurn
             // 
             lblTurn.Dock = DockStyle.Left;
-            lblTurn.Font = new Font("Segoe UI", 14F, FontStyle.Bold);
+            lblTurn.Font = new Font("Showcard Gothic", 13.8F, FontStyle.Bold, GraphicsUnit.Point, 0);
             lblTurn.Location = new Point(11, 13);
             lblTurn.Name = "lblTurn";
-            lblTurn.Size = new Size(343, 54);
+            lblTurn.Size = new Size(343, 56);
             lblTurn.TabIndex = 0;
-            lblTurn.Text = "Ходит: ";
+            lblTurn.Text = "Turn: ";
             lblTurn.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // lblCurrentNum
             // 
-            lblCurrentNum.Dock = DockStyle.Right;
+            lblCurrentNum.Anchor = AnchorStyles.Top;
             lblCurrentNum.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblCurrentNum.Location = new Point(930, 13);
+            lblCurrentNum.Location = new Point(754, 15);
             lblCurrentNum.Name = "lblCurrentNum";
-            lblCurrentNum.Size = new Size(343, 54);
+            lblCurrentNum.Size = new Size(354, 54);
             lblCurrentNum.TabIndex = 1;
             lblCurrentNum.Text = "00";
             lblCurrentNum.TextAlign = ContentAlignment.MiddleRight;
             // 
             // pnlRight
             // 
+            pnlRight.Anchor = AnchorStyles.None;
             pnlRight.Controls.Add(lstHistory);
             pnlRight.Controls.Add(lblStatus);
-            pnlRight.Dock = DockStyle.Right;
-            pnlRight.Location = new Point(1092, 80);
+            pnlRight.Location = new Point(1103, 0);
             pnlRight.Margin = new Padding(3, 4, 3, 4);
             pnlRight.Name = "pnlRight";
             pnlRight.Padding = new Padding(11, 13, 11, 13);
-            pnlRight.Size = new Size(192, 620);
+            pnlRight.Size = new Size(181, 700);
             pnlRight.TabIndex = 1;
             // 
             // lstHistory
@@ -83,18 +83,18 @@
             lstHistory.Margin = new Padding(3, 4, 3, 4);
             lstHistory.Name = "lstHistory";
             lstHistory.SelectionMode = SelectionMode.None;
-            lstHistory.Size = new Size(170, 554);
+            lstHistory.Size = new Size(159, 634);
             lstHistory.TabIndex = 0;
             // 
             // lblStatus
             // 
             lblStatus.Dock = DockStyle.Top;
-            lblStatus.Font = new Font("Segoe UI", 11F);
+            lblStatus.Font = new Font("Showcard Gothic", 10.8F, FontStyle.Regular, GraphicsUnit.Point, 0);
             lblStatus.Location = new Point(11, 13);
             lblStatus.Name = "lblStatus";
-            lblStatus.Size = new Size(170, 40);
+            lblStatus.Size = new Size(159, 40);
             lblStatus.TabIndex = 1;
-            lblStatus.Text = "Ожидание...";
+            lblStatus.Text = "Waiting...";
             lblStatus.TextAlign = ContentAlignment.MiddleCenter;
             // 
             // pnlButtons
@@ -106,42 +106,42 @@
             pnlButtons.Margin = new Padding(3, 4, 3, 4);
             pnlButtons.Name = "pnlButtons";
             pnlButtons.Padding = new Padding(11, 13, 11, 13);
-            pnlButtons.Size = new Size(1097, 161);
+            pnlButtons.Size = new Size(662, 161);
             pnlButtons.TabIndex = 2;
             // 
             // btnDraw
             // 
-            btnDraw.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnDraw.Font = new Font("Showcard Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnDraw.Location = new Point(11, 17);
             btnDraw.Margin = new Padding(3, 4, 3, 4);
             btnDraw.Name = "btnDraw";
             btnDraw.Size = new Size(297, 47);
             btnDraw.TabIndex = 0;
-            btnDraw.Text = "🎲 Вытянуть число";
+            btnDraw.Text = "🎲 Pull number";
             btnDraw.UseVisualStyleBackColor = true;
             btnDraw.Click += btnDraw_Click;
             // 
             // btnNext
             // 
-            btnNext.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnNext.Font = new Font("Showcard Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnNext.Location = new Point(11, 67);
             btnNext.Margin = new Padding(3, 4, 3, 4);
             btnNext.Name = "btnNext";
             btnNext.Size = new Size(297, 47);
             btnNext.TabIndex = 1;
-            btnNext.Text = "🔄 Следующий игрок";
+            btnNext.Text = "🔄 Next player";
             btnNext.UseVisualStyleBackColor = true;
             btnNext.Click += btnNext_Click;
             // 
             // btnReset
             // 
-            btnReset.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            btnReset.Font = new Font("Showcard Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
             btnReset.Location = new Point(320, 13);
             btnReset.Margin = new Padding(3, 4, 3, 4);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(297, 100);
             btnReset.TabIndex = 2;
-            btnReset.Text = "🔙 Выйти в меню";
+            btnReset.Text = "🔙 Exit to menu";
             btnReset.UseVisualStyleBackColor = true;
             btnReset.Click += btnReset_Click;
             // 
@@ -151,14 +151,14 @@
             tblCard.CellBorderStyle = TableLayoutPanelCellBorderStyle.OutsetDouble;
             tblCard.ColumnCount = 9;
             tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 112F));
-            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 127F));
-            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 101F));
-            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 104F));
+            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 121F));
+            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 118F));
+            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 113F));
+            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 117F));
             tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 115F));
             tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 122F));
-            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 138F));
-            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 136F));
-            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 48F));
+            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 129F));
+            tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 56F));
             tblCard.Location = new Point(0, 80);
             tblCard.Margin = new Padding(3, 4, 3, 4);
             tblCard.Name = "tblCard";
@@ -166,7 +166,7 @@
             tblCard.RowStyles.Add(new RowStyle(SizeType.Absolute, 148F));
             tblCard.RowStyles.Add(new RowStyle(SizeType.Absolute, 158F));
             tblCard.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-            tblCard.Size = new Size(1097, 463);
+            tblCard.Size = new Size(1108, 463);
             tblCard.TabIndex = 3;
             // 
             // MainForm
@@ -174,16 +174,16 @@
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1284, 700);
+            Controls.Add(tblCard);
             Controls.Add(pnlButtons);
             Controls.Add(pnlRight);
-            Controls.Add(tblCard);
             Controls.Add(pnlHeader);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
             Name = "MainForm";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "🎲 Лото | Мультиплеер";
+            Text = "🎲 Lotto | Multiplayer";
             pnlHeader.ResumeLayout(false);
             pnlRight.ResumeLayout(false);
             pnlButtons.ResumeLayout(false);

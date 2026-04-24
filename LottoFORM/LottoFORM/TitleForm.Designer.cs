@@ -12,82 +12,92 @@
 
         private void InitializeComponent()
         {
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblHint = new System.Windows.Forms.Label();
-            this.numPlayerCount = new System.Windows.Forms.NumericUpDown();
-            this.flowNames = new System.Windows.Forms.FlowLayoutPanel();
-            this.btnStart = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.numPlayerCount)).BeginInit();
-            this.SuspendLayout();
+            lblTitle = new Label();
+            lblHint = new Label();
+            numPlayerCount = new NumericUpDown();
+            flowNames = new FlowLayoutPanel();
+            btnStart = new Button();
+            ((System.ComponentModel.ISupportInitialize)numPlayerCount).BeginInit();
+            SuspendLayout();
             // 
             // lblTitle
             // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Segoe UI", 22F, System.Drawing.FontStyle.Bold);
-            this.lblTitle.Location = new System.Drawing.Point(40, 30);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Text = "🎲 Русское Лото";
+            lblTitle.AutoSize = true;
+            lblTitle.Font = new Font("Showcard Gothic", 22.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblTitle.ForeColor = SystemColors.HighlightText;
+            lblTitle.Location = new Point(12, 44);
+            lblTitle.Name = "lblTitle";
+            lblTitle.Size = new Size(363, 46);
+            lblTitle.TabIndex = 0;
+            lblTitle.Text = "🎲 Russian Lotto";
             // 
             // lblHint
             // 
-            this.lblHint.AutoSize = true;
-            this.lblHint.Font = new System.Drawing.Font("Segoe UI", 10F);
-            this.lblHint.Location = new System.Drawing.Point(40, 70);
-            this.lblHint.Name = "lblHint";
-            this.lblHint.Text = "Выберите количество игроков:";
+            lblHint.AutoSize = true;
+            lblHint.Font = new Font("Showcard Gothic", 10.2F, FontStyle.Regular, GraphicsUnit.Point, 0);
+            lblHint.ForeColor = SystemColors.HighlightText;
+            lblHint.Location = new Point(30, 140);
+            lblHint.Name = "lblHint";
+            lblHint.Size = new Size(238, 21);
+            lblHint.TabIndex = 1;
+            lblHint.Text = "Select number of players";
             // 
             // numPlayerCount
             // 
-            this.numPlayerCount.Font = new System.Drawing.Font("Segoe UI", 12F);
-            this.numPlayerCount.Location = new System.Drawing.Point(40, 100);
-            this.numPlayerCount.Maximum = 4;
-            this.numPlayerCount.Minimum = 2;
-            this.numPlayerCount.Name = "numPlayerCount";
-            this.numPlayerCount.Size = new System.Drawing.Size(60, 29);
-            this.numPlayerCount.TabIndex = 0;
-            this.numPlayerCount.Value = 2;
-            this.numPlayerCount.ValueChanged += new System.EventHandler(this.numPlayerCount_ValueChanged);
+            numPlayerCount.Font = new Font("Segoe UI", 12F);
+            numPlayerCount.Location = new Point(274, 133);
+            numPlayerCount.Margin = new Padding(3, 4, 3, 4);
+            numPlayerCount.Maximum = new decimal(new int[] { 4, 0, 0, 0 });
+            numPlayerCount.Minimum = new decimal(new int[] { 2, 0, 0, 0 });
+            numPlayerCount.Name = "numPlayerCount";
+            numPlayerCount.Size = new Size(69, 34);
+            numPlayerCount.TabIndex = 0;
+            numPlayerCount.Value = new decimal(new int[] { 2, 0, 0, 0 });
+            numPlayerCount.ValueChanged += numPlayerCount_ValueChanged;
             // 
             // flowNames
             // 
-            this.flowNames.Location = new System.Drawing.Point(40, 145);
-            this.flowNames.Name = "flowNames";
-            this.flowNames.Size = new System.Drawing.Size(260, 180);
-            this.flowNames.TabIndex = 1;
-            this.flowNames.FlowDirection = System.Windows.Forms.FlowDirection.TopDown;
+            flowNames.FlowDirection = FlowDirection.TopDown;
+            flowNames.Location = new Point(46, 193);
+            flowNames.Margin = new Padding(3, 4, 3, 4);
+            flowNames.Name = "flowNames";
+            flowNames.Size = new Size(297, 240);
+            flowNames.TabIndex = 1;
             // 
             // btnStart
             // 
-            this.btnStart.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(46)))), ((int)(((byte)(204)))), ((int)(((byte)(113)))));
-            this.btnStart.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Bold);
-            this.btnStart.ForeColor = System.Drawing.Color.White;
-            this.btnStart.Location = new System.Drawing.Point(40, 340);
-            this.btnStart.Name = "btnStart";
-            this.btnStart.Size = new System.Drawing.Size(260, 40);
-            this.btnStart.TabIndex = 2;
-            this.btnStart.Text = "🚀 Начать игру";
-            this.btnStart.UseVisualStyleBackColor = false;
-            this.btnStart.Click += new System.EventHandler(this.btnStart_Click);
+            btnStart.BackColor = Color.FromArgb(46, 204, 113);
+            btnStart.Font = new Font("Segoe UI", 12F, FontStyle.Bold);
+            btnStart.ForeColor = Color.White;
+            btnStart.Location = new Point(46, 453);
+            btnStart.Margin = new Padding(3, 4, 3, 4);
+            btnStart.Name = "btnStart";
+            btnStart.Size = new Size(297, 53);
+            btnStart.TabIndex = 2;
+            btnStart.Text = "🚀 Start Game";
+            btnStart.UseVisualStyleBackColor = false;
+            btnStart.Click += btnStart_Click;
             // 
-            // StartForm
+            // TitleForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(30)))), ((int)(((byte)(30)))), ((int)(((byte)(47)))));
-            this.ClientSize = new System.Drawing.Size(340, 400);
-            this.Controls.Add(this.lblTitle);
-            this.Controls.Add(this.lblHint);
-            this.Controls.Add(this.numPlayerCount);
-            this.Controls.Add(this.flowNames);
-            this.Controls.Add(this.btnStart);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
-            this.MaximizeBox = false;
-            this.Name = "StartForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Настройка игры";
-            ((System.ComponentModel.ISupportInitialize)(this.numPlayerCount)).EndInit();
-            this.ResumeLayout(false);
-            this.PerformLayout();
+            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(30, 30, 47);
+            ClientSize = new Size(389, 533);
+            Controls.Add(lblTitle);
+            Controls.Add(lblHint);
+            Controls.Add(numPlayerCount);
+            Controls.Add(flowNames);
+            Controls.Add(btnStart);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
+            Margin = new Padding(3, 4, 3, 4);
+            MaximizeBox = false;
+            Name = "TitleForm";
+            StartPosition = FormStartPosition.CenterScreen;
+            Text = "Game setttings";
+            ((System.ComponentModel.ISupportInitialize)numPlayerCount).EndInit();
+            ResumeLayout(false);
+            PerformLayout();
         }
 
         private System.Windows.Forms.Label lblTitle;

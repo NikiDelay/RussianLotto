@@ -1,4 +1,5 @@
 using LottoLIB;
+using System.Reflection;
 
 namespace LottoFORM
 {
@@ -11,15 +12,34 @@ namespace LottoFORM
 
         private LottoGame game;
         private List<Label> cardLabels = new List<Label>();
+        private Action onReturnToMenu;
+        private bool currentTurnDrawn = false;
+        private bool isReturningToMenu = false;
 
         public MainForm()
         {
             InitializeComponent();
+
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+            this.UpdateStyles();
+
+            EnableDoubleBuffering(tblCard);
+            EnableDoubleBuffering(pnlHeader);
+            EnableDoubleBuffering(pnlRight);
+            EnableDoubleBuffering(pnlButtons);
         }
 
-        public void InitializeGame(IEnumerable<string> playerNames)
+        private void EnableDoubleBuffering(Control ctrl)
+        {
+            var prop = ctrl.GetType().GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance);
+            prop?.SetValue(ctrl, true, null);
+        }
+
+        public void InitializeGame(IEnumerable<string> playerNames, Action onReturnToMenuCallback)
         {
             if (playerNames == null) throw new ArgumentNullException(nameof(playerNames));
+            onReturnToMenu = onReturnToMenuCallback;
 
             SetupCardLabels();
             ApplyTheme();
@@ -29,6 +49,7 @@ namespace LottoFORM
             game.TurnChanged += OnTurnChanged;
             game.PlayerWon += OnPlayerWon;
 
+            currentTurnDrawn = false;
             UpdateTurnDisplay();
 
             btnDraw.Enabled = true;
@@ -37,7 +58,21 @@ namespace LottoFORM
 
         private void SetupCardLabels()
         {
+            // 1. Сбрасываем старые стили и контролы
+            tblCard.ColumnStyles.Clear();
+            tblCard.RowStyles.Clear();
+            tblCard.Controls.Clear();
+            cardLabels.Clear();
+
+            // 2. Задаём равномерное процентное распределение
+            // 9 колонок = каждая ~11.11%, 3 строки = каждая ~33.33%
+            for (int i = 0; i < 9; i++)
+                tblCard.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100f / 9f));
+            for (int i = 0; i < 3; i++)
+                tblCard.RowStyles.Add(new RowStyle(SizeType.Percent, 100f / 3f));
+
             tblCard.SuspendLayout();
+
             for (int row = 0; row < 3; row++)
             {
                 for (int col = 0; col < 9; col++)
@@ -49,7 +84,7 @@ namespace LottoFORM
                         BackColor = Color.FromArgb(50, 50, 70),
                         ForeColor = Color.Silver,
                         TextAlign = ContentAlignment.MiddleCenter,
-                        Margin = new Padding(2)
+                        Margin = new Padding(1) // Минимальный отступ для чёткой сетки
                     };
                     tblCard.Controls.Add(lbl, col, row);
                     cardLabels.Add(lbl);
@@ -80,7 +115,8 @@ namespace LottoFORM
 
         private void UpdateTurnDisplay()
         {
-            lblTurn.Text = $"👤 Ходит: {game.CurrentPlayer.Name}";
+            lblTurn.Text = $"👤 Turn: {game.CurrentPlayer.Name}";
+            currentTurnDrawn = false;
             UpdateCardGrid();
         }
 
@@ -101,9 +137,47 @@ namespace LottoFORM
             }
         }
 
-        private void btnDraw_Click(object sender, EventArgs e) => game.DrawNext();
-        private void btnNext_Click(object sender, EventArgs e) => game.NextTurn();
-        private void btnReset_Click(object sender, EventArgs e) => this.Close();
+        private void btnDraw_Click(object sender, EventArgs e)
+        {
+            if (game.IsGameOver) return;
+
+            if (currentTurnDrawn)
+            {
+                MessageBox.Show("You have already drawn a number this turn! Pass the turn to the next player.", "Turn Completed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                return;
+            }
+
+            currentTurnDrawn = true;
+            game.DrawNext();
+        }
+
+        private void btnNext_Click(object sender, EventArgs e)
+        {
+            if (game.IsGameOver) return;
+            game.NextTurn();
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            isReturningToMenu = true;
+            onReturnToMenu?.Invoke();
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (!isReturningToMenu)
+            {
+                if (game != null)
+                {
+                    game.NumberDrawn -= OnNumberDrawn;
+                    game.TurnChanged -= OnTurnChanged;
+                    game.PlayerWon -= OnPlayerWon;
+                }
+                Environment.Exit(0);
+            }
+        }
 
         private void OnNumberDrawn(int num)
         {
@@ -114,7 +188,7 @@ namespace LottoFORM
                 if (lstHistory.Items.Count > 50) lstHistory.Items.RemoveAt(50);
                 UpdateCardGrid();
                 bool hasMatch = game.CurrentPlayer.Card.ContainsNumber(num);
-                lblStatus.Text = hasMatch ? "✅ Совпадение!" : "❌ Нет совпадения";
+                lblStatus.Text = hasMatch ? "✅ Match!" : "❌ No match";
             }));
         }
 
@@ -130,19 +204,19 @@ namespace LottoFORM
                 btnDraw.Enabled = false;
                 btnNext.Enabled = false;
 
-                string winnerNames = string.Join(" и ", winners.Select(w => w.Name));
+                string winnerNames = string.Join(" and ", winners.Select(w => w.Name));
                 bool isTie = winners.Count > 1;
 
                 lblStatus.Text = isTie
-                    ? $"🏆 Ничья! {winnerNames} выиграли!"
-                    : $"🏆 {winners[0].Name} ВЫИГРАЛ!";
+                    ? $"🏆 Draw! {winnerNames} won!"
+                    : $"🏆 {winners[0].Name} WINS!";
                 lblStatus.ForeColor = success;
 
                 string message = isTie
-                    ? $"Поздравляем! {winnerNames} одновременно закрыли карточки на числе {game.LastDrawnNumber}."
-                    : $"Поздравляем! {winners[0].Name} полностью закрыл карточку!";
+                    ? $"Congratulations! {winnerNames} completed their cards simultaneously with number {game.LastDrawnNumber}."
+                    : $"Congratulations! {winners[0].Name} has completed the card!";
 
-                MessageBox.Show(message, isTie ? "Ничья!" : "Победа!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(message, isTie ? "Draw!" : "Victory!", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }));
         }
     }

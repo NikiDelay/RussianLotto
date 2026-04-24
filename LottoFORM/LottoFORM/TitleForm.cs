@@ -1,11 +1,27 @@
-﻿namespace LottoFORM
+﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
+using System.Reflection;
+using System.Windows.Forms;
+
+namespace LottoFORM
 {
     public partial class TitleForm : Form
     {
         public TitleForm()
         {
             InitializeComponent();
+            this.DoubleBuffered = true;
+            this.SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint, true);
+            EnableDoubleBuffering(flowNames);
+            this.FormClosing += (s, e) => Environment.Exit(0);
             UpdateNameInputs();
+        }
+
+        private void EnableDoubleBuffering(Control ctrl)
+        {
+            var prop = ctrl.GetType().GetProperty("DoubleBuffered", BindingFlags.NonPublic | BindingFlags.Instance);
+            prop?.SetValue(ctrl, true, null);
         }
 
         private void UpdateNameInputs()
@@ -18,7 +34,7 @@
                 {
                     Width = 220,
                     Margin = new Padding(5),
-                    Text = $"Игрок {i + 1}",
+                    Text = $"Player {i + 1}",
                     Font = new Font("Segoe UI", 10F)
                 };
                 flowNames.Controls.Add(txt);
@@ -29,7 +45,6 @@
 
         private void btnStart_Click(object sender, EventArgs e)
         {
-            // 1. Объявляем переменную здесь, чтобы она существовала в контексте
             var playerNames = new List<string>();
             foreach (Control ctrl in flowNames.Controls)
             {
@@ -37,19 +52,21 @@
                     playerNames.Add(txt.Text.Trim());
             }
 
-            // 2. Проверка
             if (playerNames.Count < 2)
             {
-                MessageBox.Show("Введите имена для всех игроков (минимум 2).", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please enter names for all players (minimum 2).", "Error", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
-            // 3. Создание формы и передача данных
             var gameForm = new MainForm();
-            gameForm.InitializeGame(playerNames); // Вызываем наш метод
-            gameForm.Show();
+            gameForm.InitializeGame(playerNames, () =>
+            {
+                this.Show();
+                gameForm.Close();
+            });
+
+            gameForm.Show(this);
             this.Hide();
-            gameForm.FormClosed += (s, args) => this.Close();
         }
     }
 }
