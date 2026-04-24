@@ -8,4 +8,10 @@
     <UseVSTest>true</UseVSTest>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="LottoLIB">
+      <HintPath>..\..\LottoLIB\LottoLIB\bin\Debug\net10.0\LottoLIB.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
