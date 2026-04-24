@@ -17,6 +17,7 @@
             numPlayerCount = new NumericUpDown();
             flowNames = new FlowLayoutPanel();
             btnStart = new Button();
+            btnHelp = new Button();
             ((System.ComponentModel.ISupportInitialize)numPlayerCount).BeginInit();
             SuspendLayout();
             // 
@@ -78,17 +79,31 @@
             btnStart.UseVisualStyleBackColor = false;
             btnStart.Click += btnStart_Click;
             // 
+            // btnHelp
+            // 
+            btnHelp.BackColor = Color.FromArgb(70, 80, 100);
+            btnHelp.Font = new Font("Segoe UI", 10F);
+            btnHelp.ForeColor = Color.White;
+            btnHelp.Location = new Point(46, 510);
+            btnHelp.Name = "btnHelp";
+            btnHelp.Size = new Size(297, 40);
+            btnHelp.TabIndex = 3;
+            btnHelp.Text = "❓ Help & Rules";
+            btnHelp.UseVisualStyleBackColor = false;
+            btnHelp.Click += btnHelp_Click;
+            // 
             // TitleForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(30, 30, 47);
-            ClientSize = new Size(389, 533);
+            ClientSize = new Size(389, 560);
             Controls.Add(lblTitle);
             Controls.Add(lblHint);
             Controls.Add(numPlayerCount);
             Controls.Add(flowNames);
             Controls.Add(btnStart);
+            Controls.Add(btnHelp);
             FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 4, 3, 4);
             MaximizeBox = false;
@@ -105,5 +120,6 @@
         private System.Windows.Forms.NumericUpDown numPlayerCount;
         private System.Windows.Forms.FlowLayoutPanel flowNames;
         private System.Windows.Forms.Button btnStart;
+        private System.Windows.Forms.Button btnHelp;
     }
 }

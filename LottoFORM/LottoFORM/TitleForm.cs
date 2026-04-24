@@ -68,5 +68,18 @@ namespace LottoFORM
             gameForm.Show(this);
             this.Hide();
         }
+
+        private void btnHelp_Click(object sender, EventArgs e)
+        {
+            string helpText = "🎲 Russian Lotto Rules\n\n" +
+                              "• Each player gets a 3×9 card with 15 random numbers (1–90).\n" +
+                              "• Players take turns. Click 'Draw Number' ONCE per turn.\n" +
+                              "• Matching numbers are automatically marked in green.\n" +
+                              "• First to cover ALL numbers wins.\n" +
+                              "• If multiple players finish simultaneously → Draw.\n" +
+                              "• Use 'Next Player' to pass the turn.\n\n" +
+                              "🍀 Good luck!";
+            MessageBox.Show(helpText, "Game Rules", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
     }
 }

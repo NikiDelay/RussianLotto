@@ -55,7 +55,7 @@
             // 
             lblCurrentNum.Anchor = AnchorStyles.Top;
             lblCurrentNum.Font = new Font("Segoe UI", 18F, FontStyle.Bold);
-            lblCurrentNum.Location = new Point(754, 15);
+            lblCurrentNum.Location = new Point(749, 30);
             lblCurrentNum.Name = "lblCurrentNum";
             lblCurrentNum.Size = new Size(354, 54);
             lblCurrentNum.TabIndex = 1;
@@ -67,11 +67,11 @@
             pnlRight.Anchor = AnchorStyles.None;
             pnlRight.Controls.Add(lstHistory);
             pnlRight.Controls.Add(lblStatus);
-            pnlRight.Location = new Point(1103, 0);
+            pnlRight.Location = new Point(1103, 29);
             pnlRight.Margin = new Padding(3, 4, 3, 4);
             pnlRight.Name = "pnlRight";
             pnlRight.Padding = new Padding(11, 13, 11, 13);
-            pnlRight.Size = new Size(181, 700);
+            pnlRight.Size = new Size(181, 676);
             pnlRight.TabIndex = 1;
             // 
             // lstHistory
@@ -83,7 +83,7 @@
             lstHistory.Margin = new Padding(3, 4, 3, 4);
             lstHistory.Name = "lstHistory";
             lstHistory.SelectionMode = SelectionMode.None;
-            lstHistory.Size = new Size(159, 634);
+            lstHistory.Size = new Size(159, 610);
             lstHistory.TabIndex = 0;
             // 
             // lblStatus
@@ -106,7 +106,7 @@
             pnlButtons.Margin = new Padding(3, 4, 3, 4);
             pnlButtons.Name = "pnlButtons";
             pnlButtons.Padding = new Padding(11, 13, 11, 13);
-            pnlButtons.Size = new Size(662, 161);
+            pnlButtons.Size = new Size(1103, 161);
             pnlButtons.TabIndex = 2;
             // 
             // btnDraw
@@ -136,7 +136,7 @@
             // btnReset
             // 
             btnReset.Font = new Font("Showcard Gothic", 10.2F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            btnReset.Location = new Point(320, 13);
+            btnReset.Location = new Point(792, 17);
             btnReset.Margin = new Padding(3, 4, 3, 4);
             btnReset.Name = "btnReset";
             btnReset.Size = new Size(297, 100);
@@ -166,7 +166,7 @@
             tblCard.RowStyles.Add(new RowStyle(SizeType.Absolute, 148F));
             tblCard.RowStyles.Add(new RowStyle(SizeType.Absolute, 158F));
             tblCard.RowStyles.Add(new RowStyle(SizeType.Absolute, 40F));
-            tblCard.Size = new Size(1108, 463);
+            tblCard.Size = new Size(1103, 463);
             tblCard.TabIndex = 3;
             // 
             // MainForm
