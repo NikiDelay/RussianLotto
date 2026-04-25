@@ -10,25 +10,29 @@
         private void Generate()
         {
             var rnd = new Random();
+
             for (int i = 0; i < 3; i++)
-                for (int j = 0; j < 9; j++) { Numbers[i, j] = 0; Marked[i, j] = false; }
+                for (int j = 0; j < 9; j++)
+                {
+                    Numbers[i, j] = 0;
+                    Marked[i, j] = false;
+                }
 
             var colPools = new List<int>[9];
             for (int j = 0; j < 9; j++)
             {
-                int start = j == 0 ? 1 : j * 10;
-                int count = j == 8 ? 11 : 10;
-                colPools[j] = Enumerable.Range(start, count).ToList();
+                int start = j * 10 + 1; 
+                colPools[j] = Enumerable.Range(start, 10).ToList(); 
             }
-
-            for (int i = 0; i < 3; i++)
+            for (int row = 0; row < 3; row++)
             {
                 var cols = Enumerable.Range(0, 9).OrderBy(x => rnd.Next()).Take(5).ToList();
+
                 foreach (int c in cols)
                 {
                     int idx = rnd.Next(colPools[c].Count);
-                    Numbers[i, c] = colPools[c][idx];
-                    colPools[c].RemoveAt(idx);
+                    Numbers[row, c] = colPools[c][idx];
+                    colPools[c].RemoveAt(idx); 
                 }
             }
         }
