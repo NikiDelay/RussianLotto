@@ -118,10 +118,10 @@
 
 👨‍💻 Технологии
 - Язык: C# 12
-- UI: Windows Forms (Designer + code-behind)
-- Тестирование: MSTest (.NET Testing Platform)
+- UI: Windows Forms
+- Тестирование: MSTest 
 - Архитектура: Многоуровневая
-- LottoLIB — ядро игры (модели, логика, события)
-- LottoFORM — презентационный слой (формы, отрисовка, ввод)
-- LottoTests — модульные тесты
+- LottoLIB — ядро игры 
+- LottoFORM — презентационный слой 
+- LottoTEST — модульные тесты
 - Оптимизация: Двойная буферизация (DoubleBuffered, SetStyle), Environment.Exit(0) для мгновенного завершения
